@@ -1,4 +1,4 @@
-package org.eop.jedis;
+package org.eop.jedis.test;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
