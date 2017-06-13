@@ -18,7 +18,7 @@ public abstract class AbstractRedis implements IRedis {
 	//redis.clients.jedis.JedisCluster
 	private String clusterNodes;
 	private Integer connectionTimeout = 2000;
-	private Integer soTimeout = 3000;
+	private Integer soTimeout = 2000;
     private Integer maxAttempts = 5;
     private String password;
     //org.apache.commons.pool2.impl.BaseObjectPoolConfig
