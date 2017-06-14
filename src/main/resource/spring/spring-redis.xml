@@ -16,11 +16,13 @@
 	<context:property-placeholder location="redis/production/redis.properties"/>
 	
     <bean id="redis" class="org.eop.jedis.DefaultRedis" init-method="initializeJedisCluster">
+    	<!-- cluster -->
    		<property name="clusterNodes" value="${cluster.clusterNodes}"/>
    		<property name="connectionTimeout" value="${cluster.connectionTimeout}"/>
    		<property name="soTimeout" value="${cluster.soTimeout}"/>
    		<property name="maxAttempts" value="${cluster.maxAttempts}"/>
    		<!-- <property name="password" value="${cluster.password}"/> -->
+   		<!-- pool -->
    		<property name="lifo" value="${pool.lifo}"/>
    		<property name="fairness" value="${pool.fairness}"/>
    		<property name="maxWaitMillis" value="${pool.maxWaitMillis}"/>
@@ -37,6 +39,13 @@
    		<property name="maxTotal" value="${pool.maxTotal}"/>
    		<property name="maxIdle" value="${pool.maxIdle}"/>
    		<property name="minIdle" value="${pool.minIdle}"/>
+   		<!-- serde -->
+   		<property name="serdeMap">
+   			<map>
+   				<entry key="javaSerde"><bean class="org.eop.jedis.serde.JavaSerde" /></entry>
+   			</map>
+   		</property>
+   		<property name="defaultSerde" value="javaSerde" />
     </bean>
     
 </beans>

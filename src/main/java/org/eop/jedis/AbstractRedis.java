@@ -1,10 +1,12 @@
 package org.eop.jedis;
 
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
+import org.eop.jedis.serde.ISerde;
 
 import redis.clients.jedis.HostAndPort;
 import redis.clients.jedis.JedisCluster;
@@ -39,6 +41,9 @@ public abstract class AbstractRedis implements IRedis {
     private Integer maxTotal;
     private Integer maxIdle;
     private Integer minIdle;
+    //
+    private Map<String, ISerde> serdeMap;
+    private String defaultSerde;
     
     protected JedisCluster jedisCluster;
     
@@ -67,6 +72,14 @@ public abstract class AbstractRedis implements IRedis {
 				
 			}
     	}
+    }
+    
+    public ISerde getSerde() {
+    	return getSerde(getDefaultSerde());
+    }
+    
+    public ISerde getSerde(String name) {
+    	return getSerdeMap().get(name);
     }
 
 	public String getClusterNodes() {
@@ -235,6 +248,30 @@ public abstract class AbstractRedis implements IRedis {
 
 	public void setMinIdle(Integer minIdle) {
 		this.minIdle = minIdle;
+	}
+
+	public Map<String, ISerde> getSerdeMap() {
+		return serdeMap;
+	}
+
+	public void setSerdeMap(Map<String, ISerde> serdeMap) {
+		this.serdeMap = serdeMap;
+	}
+
+	public String getDefaultSerde() {
+		return defaultSerde;
+	}
+
+	public void setDefaultSerde(String defaultSerde) {
+		this.defaultSerde = defaultSerde;
+	}
+
+	public JedisCluster getJedisCluster() {
+		return jedisCluster;
+	}
+
+	public void setJedisCluster(JedisCluster jedisCluster) {
+		this.jedisCluster = jedisCluster;
 	}
     
 }
