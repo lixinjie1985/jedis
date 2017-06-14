@@ -1,10 +1,11 @@
-package org.eop.jedis.serde;
+package org.eop.jedis.serde.java;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
+import org.eop.jedis.serde.ISerde;
 import org.eop.jedis.serde.exception.SerdeException;
 
 /**

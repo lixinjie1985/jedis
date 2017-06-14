@@ -13,6 +13,7 @@ import redis.clients.jedis.JedisCluster;
  */
 public class Main {
 
+	@SuppressWarnings("resource")
 	public static void main(String[] args) {
 		ApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext.xml");
 		DefaultRedis dr = (DefaultRedis)ac.getBean("redis");

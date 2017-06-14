@@ -42,7 +42,7 @@
    		<!-- serde -->
    		<property name="serdeMap">
    			<map>
-   				<entry key="javaSerde"><bean class="org.eop.jedis.serde.JavaSerde" /></entry>
+   				<entry key="javaSerde"><bean class="org.eop.jedis.serde.java.JavaSerde" /></entry>
    			</map>
    		</property>
    		<property name="defaultSerde" value="javaSerde" />
