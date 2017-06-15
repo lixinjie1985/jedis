@@ -1,8 +1,7 @@
 package org.eop.jedis;
 
-import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
-
 import redis.clients.jedis.JedisCluster;
+import redis.clients.jedis.JedisPoolConfig;
 
 /**
  * @author lixinjie
@@ -11,15 +10,15 @@ import redis.clients.jedis.JedisCluster;
 public class DefaultRedis extends AbstractRedis {
 
 	@Override
-	protected GenericObjectPoolConfig buildGenericObjectPoolConfig() {
-		GenericObjectPoolConfig poolConfig = new GenericObjectPoolConfig();
-		applyPropertiesToGenericObjectPoolConfig(poolConfig);
+	protected JedisPoolConfig buildJedisPoolConfig() {
+		JedisPoolConfig poolConfig = new JedisPoolConfig();
+		applyPropertiesToJedisPoolConfig(poolConfig);
 		return poolConfig;
 	}
 
 	@Override
 	protected void initializeJedisCluster() {
-		jedisCluster = new JedisCluster(buildHostAndPortSet(), getConnectionTimeout(), getSoTimeout(), getMaxAttempts(), getPassword(), buildGenericObjectPoolConfig());
+		jedisCluster = new JedisCluster(buildHostAndPortSet(), getConnectionTimeout(), getSoTimeout(), getMaxAttempts(), getPassword(), buildJedisPoolConfig());
 	}
 
 }

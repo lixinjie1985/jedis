@@ -5,11 +5,11 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.beanutils.PropertyUtils;
-import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
 import org.eop.jedis.serde.ISerde;
 
 import redis.clients.jedis.HostAndPort;
 import redis.clients.jedis.JedisCluster;
+import redis.clients.jedis.JedisPoolConfig;
 
 /**
  * @author lixinjie
@@ -47,7 +47,7 @@ public abstract class AbstractRedis implements IRedis {
     
     protected JedisCluster jedisCluster;
     
-    protected abstract GenericObjectPoolConfig buildGenericObjectPoolConfig();
+    protected abstract JedisPoolConfig buildJedisPoolConfig();
     
     protected abstract void initializeJedisCluster();
     
@@ -60,7 +60,7 @@ public abstract class AbstractRedis implements IRedis {
     	return hps;
     }
     
-    protected void applyPropertiesToGenericObjectPoolConfig(GenericObjectPoolConfig poolConfig) {
+    protected void applyPropertiesToJedisPoolConfig(JedisPoolConfig poolConfig) {
     	String[] properties = {"lifo", "fairness", "maxWaitMillis", "minEvictableIdleTimeMillis", "softMinEvictableIdleTimeMillis", "numTestsPerEvictionRun", "evictionPolicyClassName", "testOnCreate", "testOnBorrow", "testOnReturn", "testWhileIdle", "timeBetweenEvictionRunsMillis", "blockWhenExhausted", "maxTotal", "maxIdle", "minIdle"};
     	for (String property : properties) {
     		try {
